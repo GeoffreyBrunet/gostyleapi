@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 class PromoController {
 
     @GetMapping("/api/promotions")
-    public Item showPromotions(){
-        Item item = new Item(1, new String("sneakers"), new String("picture"), 199.99);
-        return item;
+    public String showPromotions(){
+        return "item";
     }
 
 }
