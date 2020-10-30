@@ -1,10 +1,10 @@
-package com.thegeoffreybrunet.gostyleapi.controller;
+package com.thegeoffreybrunet.gostyleapi.web.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class EmailController {
+class EmailController {
 
     @GetMapping("/api/email")
     public String getEmail(){
