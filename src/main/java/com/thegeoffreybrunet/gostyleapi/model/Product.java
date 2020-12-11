@@ -1,10 +1,10 @@
 package com.thegeoffreybrunet.gostyleapi.model;
 
-public class Promotion {
+public class Product {
     private int idPromo;
     private String productName, oldPrice, newPrice, picture;
 
-    public Promotion(int idPromo, String productName, String oldPrice, String newPrice, String picture) {
+    public Product(int idPromo, String productName, String oldPrice, String newPrice, String picture) {
         this.idPromo = idPromo;
         this.productName = productName;
         this.oldPrice = oldPrice;

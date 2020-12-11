@@ -14,6 +14,6 @@ I have used the java framework [Spring](https://spring.io/) for the backend.
 
 ## Database
 [PostgreSQL](https://www.postgresql.org/)
-ID: postres  
-Password: Bc4ydipFo2V36iiZCC6f  
-Address: gostyleapi-db.chsjhycvg25z.eu-west-3.rds.amazonaws.com  
+ID: postgres  
+Password: SCvQdXQyg0MiA9g94QSR 
+Address: db-gostyle.chsjhycvg25z.eu-west-3.rds.amazonaws.com  
