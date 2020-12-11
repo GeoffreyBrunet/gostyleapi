@@ -1,47 +1,30 @@
 package com.thegeoffreybrunet.gostyleapi.model;
 
 public class Product {
-    private int idPromo;
-    private String productName, oldPrice, newPrice, picture;
+    private String product_name;
+    private double price;
+    private String picture;
 
-    public Product(int idPromo, String productName, String oldPrice, String newPrice, String picture) {
-        this.idPromo = idPromo;
-        this.productName = productName;
-        this.oldPrice = oldPrice;
-        this.newPrice = newPrice;
+    public Product(String product_name, double price, String picture) {
+        this.product_name = product_name;
+        this.price = price;
         this.picture = picture;
     }
 
-    public int getIdPromo() {
-        return idPromo;
+    public String getProduct_name() {
+        return product_name;
     }
 
-    public void setIdPromo(int idPromo) {
-        this.idPromo = idPromo;
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 
-    public String getProductName() {
-        return productName;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getOldPrice() {
-        return oldPrice;
-    }
-
-    public void setOldPrice(String oldPrice) {
-        this.oldPrice = oldPrice;
-    }
-
-    public String getNewPrice() {
-        return newPrice;
-    }
-
-    public void setNewPrice(String newPrice) {
-        this.newPrice = newPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getPicture() {
@@ -50,16 +33,5 @@ public class Product {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    @Override
-    public String toString() {
-        return "Promotion{" +
-                "idPromo=" + idPromo +
-                ", productName='" + productName + '\'' +
-                ", oldPrice='" + oldPrice + '\'' +
-                ", newPrice='" + newPrice + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
     }
 }
