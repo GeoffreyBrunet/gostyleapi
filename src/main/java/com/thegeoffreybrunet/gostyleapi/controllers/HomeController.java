@@ -1,4 +1,4 @@
-package com.thegeoffreybrunet.gostyleapi.web.Controller;
+package com.thegeoffreybrunet.gostyleapi.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

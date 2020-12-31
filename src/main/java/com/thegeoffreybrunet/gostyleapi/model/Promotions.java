@@ -1,22 +1,46 @@
 package com.thegeoffreybrunet.gostyleapi.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "promotions")
 public class Promotions {
-    private double taux_promotion;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id_promo;
+
+    @Column(name = "taux_promotion")
+    private String email_address;
+
+    @Column(name = "qrcode_promo")
     private String qrcode_promo;
+
+    @Column(name = "id_product")
     private int id_product;
 
-    public Promotions(double taux_promotion, String qrcode_promo, int id_product) {
-        this.taux_promotion = taux_promotion;
+    public Promotions() {
+    }
+
+    public Promotions(String email_address, String qrcode_promo, int id_product) {
+        this.email_address = email_address;
         this.qrcode_promo = qrcode_promo;
         this.id_product = id_product;
     }
 
-    public double getTaux_promotion() {
-        return taux_promotion;
+    public long getId_promo() {
+        return id_promo;
     }
 
-    public void setTaux_promotion(double taux_promotion) {
-        this.taux_promotion = taux_promotion;
+    public void setId_promo(long id_promo) {
+        this.id_promo = id_promo;
+    }
+
+    public String getEmail_address() {
+        return email_address;
+    }
+
+    public void setEmail_address(String email_address) {
+        this.email_address = email_address;
     }
 
     public String getQrcode_promo() {
@@ -33,5 +57,15 @@ public class Promotions {
 
     public void setId_product(int id_product) {
         this.id_product = id_product;
+    }
+
+    @Override
+    public String toString() {
+        return "Promotions{" +
+                "id_promo=" + id_promo +
+                ", email_address='" + email_address + '\'' +
+                ", qrcode_promo='" + qrcode_promo + '\'' +
+                ", id_product=" + id_product +
+                '}';
     }
 }
