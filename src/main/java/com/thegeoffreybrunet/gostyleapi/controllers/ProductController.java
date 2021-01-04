@@ -19,7 +19,7 @@ class ProductController {
     @Autowired
     ProductRepository productRepository;
 
-    @GetMapping("/api/product")
+    @GetMapping("/api/products")
     public ResponseEntity<List<Product>> getProduct(){
         List<Product> products = new ArrayList<Product>();
         productRepository.findAll().forEach(products::add);
