@@ -1,18 +1,27 @@
 package com.thegeoffreybrunet.gostyleapi.controllers;
 
 import com.thegeoffreybrunet.gostyleapi.model.Email;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.thegeoffreybrunet.gostyleapi.repository.EmailRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @CrossOrigin
 class EmailController {
 
-    @PutMapping("/api/email")
-    public String getEmail(){
-        String email="toto";
-        return email;
+    @Autowired
+    EmailRepository emailRepository;
+
+    @PostMapping("/api/email")
+    public ResponseEntity<Email> addEmail(@RequestBody Email email){
+        Email emailData = emailRepository.save(email);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(emailData.getEmail_address()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
 }
