@@ -3,6 +3,7 @@ package com.thegeoffreybrunet.gostyleapi.controllers;
 import com.thegeoffreybrunet.gostyleapi.model.Promotion;
 import com.thegeoffreybrunet.gostyleapi.repository.PromotionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +14,15 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-public class PromotionsController {
+public class PromotionController {
 
     @Autowired
     PromotionsRepository promotionsRepository;
 
-    @GetMapping("/api/promotions/{id}")
-    public ResponseEntity<Promotion> getPromotion(@PathVariable long id) {
-        Optional<Promotion> promotionData = promotionsRepository.findById(id);
-        if (!student.isPresent())
-            throw new StudentNotFoundException("id-" + id);
-        return student.get();
+    @GetMapping("/api/promotions/{qrcodePromo}")
+    public ResponseEntity<Promotion> getPromotion(@PathVariable String qrcodePromo) {
+        Optional<Promotion> promotionData = Optional.ofNullable(promotionsRepository.findByQrcodePromoEquals(qrcodePromo));
+        return new ResponseEntity<>(promotionData.get(), HttpStatus.OK);
     }
 
 }
