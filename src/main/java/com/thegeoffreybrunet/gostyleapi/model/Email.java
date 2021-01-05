@@ -7,39 +7,39 @@ import javax.persistence.*;
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id_email;
+    private long idEmail;
 
     @Column(name = "email_address")
-    private String email_address;
+    private String emailAddress;
 
     public Email() {
     }
 
-    public Email(String email_address) {
-        this.email_address = email_address;
+    public Email(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public long getId_email() {
-        return id_email;
+    public long getIdEmail() {
+        return idEmail;
     }
 
-    public void setId_email(long id_email) {
-        this.id_email = id_email;
+    public void setIdEmail(long id_email) {
+        this.idEmail = id_email;
     }
 
-    public String getEmail_address() {
-        return email_address;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail_address(String email_address) {
-        this.email_address = email_address;
+    public void setEmailAddress(String email_address) {
+        this.emailAddress = email_address;
     }
 
     @Override
     public String toString() {
         return "Email{" +
-                "id_email=" + id_email +
-                ", email_address='" + email_address + '\'' +
+                "id_email=" + idEmail +
+                ", email_address='" + emailAddress + '\'' +
                 '}';
     }
 }
