@@ -20,7 +20,7 @@ class EmailController {
     public ResponseEntity<Email> addEmail(@RequestBody Email email){
         Email emailData = emailRepository.save(email);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(emailData.getEmail_address()).toUri();
+                .buildAndExpand(emailData.getEmailAddress()).toUri();
         return ResponseEntity.created(location).build();
     }
 
