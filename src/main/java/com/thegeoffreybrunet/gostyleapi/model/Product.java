@@ -21,7 +21,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, int price, String picture) {
+    public Product(long idProduct, String productName, int price, String picture) {
+        this.idProduct = idProduct;
         this.productName = productName;
         this.price = price;
         this.picture = picture;
@@ -31,16 +32,16 @@ public class Product {
         return idProduct;
     }
 
-    public void setIdProduct(long id_product) {
-        this.idProduct = id_product;
+    public void setIdProduct(long idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String product_name) {
-        this.productName = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getPrice() {
@@ -62,8 +63,8 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "id_product=" + idProduct +
-                ", product_name='" + productName + '\'' +
+                "idProduct=" + idProduct +
+                ", productName='" + productName + '\'' +
                 ", price=" + price +
                 ", picture='" + picture + '\'' +
                 '}';

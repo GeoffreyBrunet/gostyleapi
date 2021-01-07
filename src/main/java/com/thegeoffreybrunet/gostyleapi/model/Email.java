@@ -15,7 +15,8 @@ public class Email {
     public Email() {
     }
 
-    public Email(String emailAddress) {
+    public Email(long idEmail, String emailAddress) {
+        this.idEmail = idEmail;
         this.emailAddress = emailAddress;
     }
 
@@ -23,23 +24,23 @@ public class Email {
         return idEmail;
     }
 
-    public void setIdEmail(long id_email) {
-        this.idEmail = id_email;
+    public void setIdEmail(long idEmail) {
+        this.idEmail = idEmail;
     }
 
     public String getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(String email_address) {
-        this.emailAddress = email_address;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override
     public String toString() {
         return "Email{" +
-                "id_email=" + idEmail +
-                ", email_address='" + emailAddress + '\'' +
+                "idEmail=" + idEmail +
+                ", emailAddress='" + emailAddress + '\'' +
                 '}';
     }
 }
