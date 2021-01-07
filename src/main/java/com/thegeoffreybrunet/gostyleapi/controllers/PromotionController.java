@@ -19,10 +19,10 @@ public class PromotionController {
     @Autowired
     PromotionsRepository promotionsRepository;
 
-    @GetMapping("/api/promotions/{qrcodePromo}")
-    public ResponseEntity<Promotion> getPromotion(@PathVariable String qrcodePromo) {
-        Optional<Promotion> promotionData = Optional.ofNullable(promotionsRepository.findByQrcodePromoEquals(qrcodePromo));
-        return new ResponseEntity<>(promotionData.get(), HttpStatus.OK);
+    @GetMapping("/api/promotions/{qrcodeAcquired}")
+    public Promotion getPromotion(@PathVariable String qrcodeAcquired) {
+        Promotion promotionData = promotionsRepository.findByQrcodePromoEquals(qrcodeAcquired);
+        return promotionData;
     }
 
 }
