@@ -35,9 +35,9 @@ CREATE TABLE promotions (
 	id_promo serial PRIMARY KEY,
 	taux_promotion NUMERIC NOT NULL,
 	qrcode_promo VARCHAR ( 21 ) NOT NULL,
-	id_product SMALLINT,
+	product_id SMALLINT,
 	CONSTRAINT fk_product
-      FOREIGN KEY(id_product)
+      FOREIGN KEY(product_id)
 	    REFERENCES product(id_product)
 	    ON DELETE CASCADE
 );
@@ -59,7 +59,7 @@ INSERT INTO product (product_name, price, picture)
 -- Insert data into "promotions" table
 --
 
-INSERT INTO promotions (taux_promotion, qrcode_promo, id_product)
+INSERT INTO promotions (taux_promotion, qrcode_promo, product_id)
     VALUES
         (20, 'mDCwfP5dS5xgtt9Nw4N7', 1),
         (20, 'kbxETDtNTQLMrHUvLOky', 2),
