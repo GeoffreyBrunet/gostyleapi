@@ -10,62 +10,77 @@ public class Promotion {
     private long idPromo;
 
     @Column(name = "taux_promotion")
-    private String emailAddress;
+    private String tauxPromotion;
 
     @Column(name = "qrcode_promo")
     private String qrcodePromo;
 
-    @Column(name = "id_product")
-    private int idProduct;
+    @Column(name = "product_id")
+    private int productId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Product product;
 
     public Promotion() {
     }
 
-    public Promotion(String emailAddress, String qrcodePromo, int idProduct) {
-        this.emailAddress = emailAddress;
+    public Promotion(long idPromo, String tauxPromotion, String qrcodePromo, int productId, Product product) {
+        this.idPromo = idPromo;
+        this.tauxPromotion = tauxPromotion;
         this.qrcodePromo = qrcodePromo;
-        this.idProduct = idProduct;
+        this.productId = productId;
+        this.product = product;
     }
 
     public long getIdPromo() {
         return idPromo;
     }
 
-    public void setIdPromo(long id_promo) {
-        this.idPromo = id_promo;
+    public void setIdPromo(long idPromo) {
+        this.idPromo = idPromo;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getTauxPromotion() {
+        return tauxPromotion;
     }
 
-    public void setEmailAddress(String email_address) {
-        this.emailAddress = email_address;
+    public void setTauxPromotion(String tauxPromotion) {
+        this.tauxPromotion = tauxPromotion;
     }
 
     public String getQrcodePromo() {
         return qrcodePromo;
     }
 
-    public void setQrcodePromo(String qrcode_promo) {
-        this.qrcodePromo = qrcode_promo;
+    public void setQrcodePromo(String qrcodePromo) {
+        this.qrcodePromo = qrcodePromo;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setIdProduct(int id_product) {
-        this.idProduct = id_product;
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public String toString() {
-        return "Promotions{" +
-                "id_promo=" + idPromo +
-                ", email_address='" + emailAddress + '\'' +
-                ", qrcode_promo='" + qrcodePromo + '\'' +
-                ", id_product=" + idProduct +
+        return "Promotion{" +
+                "idPromo=" + idPromo +
+                ", tauxPromotion='" + tauxPromotion + '\'' +
+                ", qrcodePromo='" + qrcodePromo + '\'' +
+                ", productId=" + productId +
+                ", product=" + product +
                 '}';
     }
 }
