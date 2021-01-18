@@ -17,3 +17,17 @@ I have used the java framework [Spring](https://spring.io/) for the backend.
 ID: postgres  
 Password: SCvQdXQyg0MiA9g94QSR  
 Address: db-gostyle.chsjhycvg25z.eu-west-3.rds.amazonaws.com  
+
+https://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate  
+
+https://www.baeldung.com/sonar-qube  
+
+SELECT taux_promotion, product_name, price, picture
+FROM promotions
+INNER JOIN product
+	ON product.id_product = promotions.id_promo
+WHERE qrcode_promo = 'mDCwfP5dS5xgtt9Nw4N7'  
+
+https://github.com/marketplace/actions/beanstalk-deploy  
+
+https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-one-mapping-example/  
