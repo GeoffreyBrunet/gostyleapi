@@ -17,6 +17,7 @@
 \chapter{Introduction}
 Ce projet est une application qui permet de scanner des coupons de réduction, sous forme de code QR.
 \newline
+\newline
 Elle se divise donc en trois parties distinctes:
 \newline
 - l'application android, chargée d'afficher une liste de produits, et de scanner un qrcode pour afficher une promotion sur un produit.
@@ -79,10 +80,23 @@ Le framework Spring Boot a été choisis car il permet d'écrire du code plus fa
 Un de ces outils utilisé est Spring Data JPA, qui est un ORM (object-relational mapping, ou en français mapping objet-relationnel) inspiré d'un autre ORM déjà présent depuis plusieurs années dans l'écosystème java, Hibernate.
 Un ORM permet de manipuler des bases de données sans avoir à écrire de requêtes SQL, ce que nous faisons avec Spring Data JAP pour l'API REST à notre base de données.
 \section{Création de l'image Docker}
-En entilisant le JAR produit lors du build de l'API, 
+À partir du JAR produit lors du build de l'API, nous le rajoutons dans une image docker, pour pouvoir lancer notre API depuis n'importe quel serveur où Docker est disponible.
 \section{Déployement sur ECS chez AWS}
 L'API a été déployée sur ECS (Elastic Container Service), un service qui permet de déployer des conteneurs tout en ayant abstraction de la gestion de l'infrastructure sous-jacente.
 La solution d'utiliser Elastic Beanstalk, un service permetant de déployer une application sans avoir à gérer la machine virtuelle qui l'héberge n'a pas été retenue, car celui-ci ne propose que l'utilisation d'un JRE devellopé par Amazon (Amazon Corretto).
+\section{Fonctionnement de l'API REST}
+Une API dite REST (Representational state transfer) est un type d'architecture logicielle pour créer des services web, selon des contraintes de développement et de fonctionnement.
+En utilisant Spring Boot, le patrno MVC (Modèle-vue-contrôleur) était le choix le plus logique.
+\newline
+\includegraphics[scale=1]{./images/Backend/myspring.png}
+\newline
+Cette image est l'arborescence de notre projet. Notre API ne délivrant pas de pages web, nous n'avons pas de vues.
+\newline
+Les controlleurs sont les routes de notre API, avec une partie de la logique de notre code.
+\newline
+Le dossier "model" contient les modèles utilisés par notre API, avec des annonations permettant de les utiliser comme modèle de notre base de données, par le biais de Spring Data JPA.
+\newline
+Le dossier "repository" contient les interfaces pour faire communiquer notre API avec notre base de données, en utilisant les modèles pour le transfert et le stockage de données.
 \chapter{SGBD}
 \section{théorème CAP}
 Avant de choisir SGBD (Système de gestion de base de données), il faut décider du type de SGBD pour l'application, en fonction des différents cas d'usage.
