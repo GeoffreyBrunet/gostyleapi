@@ -10,7 +10,7 @@
 \begin{document}
 
 \title{MSPR: Développement d’une application informatique dans le respect du cahier des charges Client}
-\author{Brunet Geoffrey}
+\author{Brunet Geoffrey, Salamolard Baptiste}
 \graphicspath{ {images/} }
 \maketitle
 
@@ -29,12 +29,50 @@ Elle se divise donc en trois parties distinctes:
 \includegraphics[scale=0.65]{./images/Introduction/schema-app.PNG}
 \chapter{Application mobile}
 \section{Java sur Android Studio}
-Choix du language Java pour l'application mobile.
+À la vue du cahier des charges nous nous sommes tournés vers une application Android n’ayant pas personnellement de Mac ou même d’outil Apple le développement d’une application IOS aurait été compliqués et nous aurait retardés.
+\newline
+\newline
+De plus le développement sur Android nous as permis d'utiliser les compétences apprises lors du cours "Introduction au developpement Android", il aurait donc été dommage de faire cette application sur IOS.
+\newline
+Après avoir décidé que cette application serait sur Android il fallait ce décider sur le choix du langage, a ce stade nous hésitions entre deux, du Java et du Kotlin au final nous utiliserons le Java afin de réaliser l’application car nous avions eu auparavant différents cours de Java et des bases plus solides sur ce langage.
+\newline
+\newline
+Nous avons essayé au départ le Kotlin mais les tutos sur Internet étant plutôt orienté Java et la non-connaissance de ce langage à fini par nous pousser à faire du Java.
+\newline
+Après avoir travaillé un moment sur le programme en Java j'ai confirmé le choix de passer sur du Java afin d’avancer plus aisément et d'avoir accès à plus d'aide aussi bien sur Internet qu’au sein du corps enseignant.
 \section{Fonctionnement de l'application}
-Comment fonctionne l'application android
+Pour commencer l’application se lance sur une page ou il est demandé de renseigner une adresse électronique, si cette adresse est déjà présente sur la Base de données alors un message d’erreur apparait.
+\newline
+\newline
+Après avoir remplis le champ de l’adresse électronique on appui sur le bouton en dessous afin d’envoyer ce mail sur la BDD, c’est alors qu’apparait un Pop-up qui nous informe que l’adresse mail seras conservé mais non utilisé à des fins commerciales tous cela dans le but de respecter le RGPD.
+\newline
+\newline
+\includegraphics[scale=0.4]{./images/Application-mobile/oui1.png}
+\newline
+\newline
+Ce Pop-up doit obligatoirement être accepté par l’utilisateur sinon il ne peut pas accéder à la suite de l’application, après avoir accepté le Pop-up on arrive sur une nouvelle page qui nous affiche la liste des produits présentes sur la BDD sous forme de liste.
+\newline
+\newline
+Dans cette liste on retrouve évidemment le Nom de l’article en vente ainsi que son prix et une image montrant le produit en question, cette liste est dynamique et dépend de ce qui est présent dans la BDD.
+\newline
+\newline
+\includegraphics[scale=0.4]{./images/Application-mobile/oui2.png}
+\newline
+\newline
+A la suite de cette liste se trouve un bouton nommé « QRCode », a l’appui du bouton la caméra de téléphone se lance après une demande des droits d’utilisations de l’appareil photo. Par la suite tout qrcode qui apparaitra devant l’appareil photo est automatiquement détecté, après avoir détecté le qrcode l’appareil photo se ferme (retour sur la page précédente avec la liste) et la signification du qrcode est envoyé à la BDD si ce qrcode correspond bien à une réduction alors la BDD nous retourne l’article en question avec son pourcentage de réduction. Il reste à calculer la réduction en local puis on affiche l’article avec son nouveau prix dans la liste précédente.
+\newline
+\newline
+\includegraphics[scale=0.4]{./images/Application-mobile/oui4.png}
+\includegraphics[scale=0.4]{./images/Application-mobile/oui3.png}
+\newline
+\newline
+Un clic sur un article de la liste affiche un Pop-up rapide en bas de l’écran qui nous informe que nous essayons d’acheter un article avec son nom et son prix afin d’éviter toutes erreurs de l’utilisateur.
 \chapter{Backend}
 \section{Spring Boot}
 Le langage java a été choisis pour le backend car il permet une abstraction du hardware et de l'OS grâce à la JVM. Présent dans la plupard des entreprises dans le monde, nous avons l'avantage d'une grande communauté pour écrire notre API REST la plus professionnelle possible.
+\newline
+\newline
+\includegraphics[scale=0.4]{./images/Backend/spring.png}
 \newline
 \newline
 Le framework Spring Boot a été choisis car il permet d'écrire du code plus facilement lisible, maintenable et avec tout un panel d'outils à disposition.
@@ -71,8 +109,20 @@ PostgreSQL a une documentation bien fournie, qui permet un apprentissage plutôt
 Pour la création des tables et des données, nous avons utilisé une interface web elle aussi Open Source, appelée "PGAdmin 4".
 \section{Tables et données dans la base de données}
 Nous avons créé la base de données "shop" qui contiens 3 tables différentes: "emails", "product" et "promotions".
+\newline
+\newline
+\includegraphics[scale=1.2]{./images/SGBD/mcd.png}
+\newline
+\newline
+La table "emails" stocke les adresses mail des utilisateurs.
+\newline
+La table "product" stocke les produits en vente, avec des informations comme le prix, l'image, le nom du produit.
+\newline
+La table "promotions" stocke les qrcodes qui appliqueront les promotions, en lien avec les produits par le biais d'une clef étrangère, référencée au "product id" dans la table "product".
+\newline  
 \section{Déployement sur RDS chez AWS}
 AWS propose RDS (Relational Database Service), un service de SGBD dans le cloud et sans gestion de serveur.
-Proposant PostgreSQL, cette solution a été retenue car nous n'avons qu'à gérer les bases de données sur notre serveur.
+\newline  
+Proposant PostgreSQL, cette solution a été retenue car nous n'avons pas à gérer le serveur hébergeant notre SGBD.
 
 \end{document}
