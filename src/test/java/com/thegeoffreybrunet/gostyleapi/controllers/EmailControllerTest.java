@@ -1,28 +1,52 @@
 package com.thegeoffreybrunet.gostyleapi.controllers;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-//import static org.mockito.Mockito.*;
-class EmailControllerTest {
-    @Mock
-    com.thegeoffreybrunet.gostyleapi.repository.EmailRepository emailRepository;
-    @InjectMocks
-    com.thegeoffreybrunet.gostyleapi.controllers.EmailController emailController;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thegeoffreybrunet.gostyleapi.model.Email;
+import com.thegeoffreybrunet.gostyleapi.repository.EmailRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+@ContextConfiguration(classes = {EmailController.class})
+@ExtendWith(SpringExtension.class)
+public class EmailControllerTest {
+    @Autowired
+    private EmailController emailController;
+
+    @MockBean
+    private EmailRepository emailRepository;
 
     @Test
-    void testAddEmail(){
-        org.springframework.http.ResponseEntity<com.thegeoffreybrunet.gostyleapi.model.Email> result = emailController.addEmail(new com.thegeoffreybrunet.gostyleapi.model.Email(0L, "emailAddress"));
-        Assertions.assertEquals(null, result);
+    public void testAddEmail() throws Exception {
+        Email email = new Email();
+        email.setIdEmail(1L);
+        email.setEmailAddress("42 Main St");
+        when(this.emailRepository.save((Email) any())).thenReturn(email);
+
+        Email email1 = new Email();
+        email1.setIdEmail(1L);
+        email1.setEmailAddress("42 Main St");
+        String content = (new ObjectMapper()).writeValueAsString(email1);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/email")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content);
+        ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.emailController)
+                .build()
+                .perform(requestBuilder);
+        actualPerformResult.andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("http://localhost/api/email/42%20Main%20St"));
     }
 }
 
-//Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme
