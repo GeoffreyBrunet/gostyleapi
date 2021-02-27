@@ -15,15 +15,64 @@
 \maketitle
 
 \chapter{Introduction}
-Description générale du projet.
+Ce projet est une application qui permet de scanner des coupons de réduction, sous forme de code QR.
+\newline
+Elle se divise donc en trois parties distinctes:
+\newline
+- l'application android, chargée d'afficher une liste de produits, et de scanner un qrcode pour afficher une promotion sur un produit.
+\newline
+- une API (Application Programming Interface, permet de communiquer avec d'autres produits et services sans connaître les détails de leur mise en œuvre) qui fait le lien entre l'application et la base de données.
+\newline
+- la base de données, pour stocker des informations sur le long terme.
+\newline
+\newline
+\includegraphics[scale=0.65]{./images/Introduction/schema-app.PNG}
 \chapter{Application mobile}
+\section{Java sur Android Studio}
 Choix du language Java pour l'application mobile.
+\section{Fonctionnement de l'application}
+Comment fonctionne l'application android
 \chapter{Backend}
-Choix du language Java et du framework Spring Boot.
-Abstraction du hardware et de l'OS grâce à la JVM.
+\section{Spring Boot}
+Le langage java a été choisis pour le backend car il permet une abstraction du hardware et de l'OS grâce à la JVM. Présent dans la plupard des entreprises dans le monde, nous avons l'avantage d'une grande communauté pour écrire notre API REST la plus professionnelle possible.
+\newline
+\newline
+Le framework Spring Boot a été choisis car il permet d'écrire du code plus facilement lisible, maintenable et avec tout un panel d'outils à disposition.
+Un de ces outils utilisé est Spring Data JPA, qui est un ORM (object-relational mapping, ou en français mapping objet-relationnel) inspiré d'un autre ORM déjà présent depuis plusieurs années dans l'écosystème java, Hibernate.
+Un ORM permet de manipuler des bases de données sans avoir à écrire de requêtes SQL, ce que nous faisons avec Spring Data JAP pour l'API REST à notre base de données.
+\section{Création de l'image Docker}
+En entilisant le JAR produit lors du build de l'API, 
+\section{Déployement sur ECS chez AWS}
+L'API a été déployée sur ECS (Elastic Container Service), un service qui permet de déployer des conteneurs tout en ayant abstraction de la gestion de l'infrastructure sous-jacente.
+La solution d'utiliser Elastic Beanstalk, un service permetant de déployer une application sans avoir à gérer la machine virtuelle qui l'héberge n'a pas été retenue, car celui-ci ne propose que l'utilisation d'un JRE devellopé par Amazon (Amazon Corretto).
 \chapter{SGBD}
-Choix de postgreSQL
-\chapter{Hébergement}
-Choix du PAAS Heroku
+\section{théorème CAP}
+Avant de choisir SGBD (Système de gestion de base de données), il faut décider du type de SGBD pour l'application, en fonction des différents cas d'usage.
+\newline
+Le théorème CAP a été écris pour palier à ce choix. Celui-ci ce compose en trois critères différents, qui sont:
+\newline
+- la cohérence (ou consistency en anglais)
+\newline
+- la disponibilité (ou availability en anglais)
+\newline
+- la tolérance au partitionnement (ou partition tolerance en anglais)
+\newline
+\newline
+\includegraphics[scale=0.32]{./images/SGBD/Visualization-of-CAP-theorem.png}
+\newline
+\section{PostgreSQL}
+Le choix de PostgreSQL c'est fait pour plusieurs raisons.
+La première est qu'il est multiplateforme et multiarchitecture, ce qui permet une lagre disponibilité.
+La deuxième est qu'il est performant et fiable, certes au détriment de nouvelles fonctionnalités.
+La troisième et denière est qu'il est gratuit, Open Source, et avec une communauté active, ce qui permet de trouver facilement des solutions si un problème se présente.
+\newline
+\newline
+PostgreSQL a une documentation bien fournie, qui permet un apprentissage plutôt simple.
+Pour la création des tables et des données, nous avons utilisé une interface web elle aussi Open Source, appelée "PGAdmin 4".
+\section{Tables et données dans la base de données}
+Nous avons créé la base de données "shop" qui contiens 3 tables différentes: "emails", "product" et "promotions".
+\section{Déployement sur RDS chez AWS}
+AWS propose RDS (Relational Database Service), un service de SGBD dans le cloud et sans gestion de serveur.
+Proposant PostgreSQL, cette solution a été retenue car nous n'avons qu'à gérer les bases de données sur notre serveur.
 
 \end{document}
