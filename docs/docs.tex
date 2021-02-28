@@ -14,8 +14,18 @@
 \graphicspath{ {images/} }
 \maketitle
 
+\tableofcontents
+
 \chapter{Introduction}
 Ce projet est une application qui permet de scanner des coupons de réduction, sous forme de code QR.
+\newline
+Le projet Github pour l'application Android se trouve à cette adresse:
+\newline
+https://github.com/Ressio1/MSPR
+\newline
+Le projet Github pour l'API se trouve à cette adresse:
+\newline
+https://github.com/GeoffreyBrunet/gostyleapi
 \newline
 \newline
 Elle se divise donc en trois parties distinctes:
@@ -68,11 +78,26 @@ A la suite de cette liste se trouve un bouton nommé « QRCode », a l’appui d
 \newline
 \newline
 Un clic sur un article de la liste affiche un Pop-up rapide en bas de l’écran qui nous informe que nous essayons d’acheter un article avec son nom et son prix afin d’éviter toutes erreurs de l’utilisateur.
+\section{Description du code}
+\includegraphics[scale=0.5]{./images/Application-mobile/codeand1.png}
+\newline
+Au lancement de la fonction on initialise une connexion afin de contacter la base de données. C’est par ailleurs ici que l’on va utiliser l’url mis en paramètre lors de l’appel de la fonction.
+\newline
+\newline
+\includegraphics[scale=0.5]{./images/Application-mobile/codeand2.png}
+\newline
+Cette partie du code seras exécuté seulement si la requête n’échoue pas, on peut voir ici qu’on traduit ce que l’on reçoit afin de pouvoir l’exploiter la réponse de la BDD. Finalement on coupe et récupère seulement les parties intéressantes que l’on veut afficher ou utiliser comme les noms les prix etc… 
+\newline
+\newline
+\includegraphics[scale=0.5]{./images/Application-mobile/codeand3.png}
+\newline
 \chapter{Backend}
 \section{Spring Boot}
 Le langage java a été choisis pour le backend car il permet une abstraction du hardware et de l'OS grâce à la JVM. Présent dans la plupard des entreprises dans le monde, nous avons l'avantage d'une grande communauté pour écrire notre API REST la plus professionnelle possible.
+Il est utilisé avec Maven, un outil de gestion d'automatisation et de dépendances pour Java.
 \newline
 \newline
+Dans le cas ou la requêtes rate alors on affiche simplement un message d’erreur afin d’informer l’utilisateur que la requête n’a pas aboutie. 
 \includegraphics[scale=0.4]{./images/Backend/spring.png}
 \newline
 \newline
@@ -92,11 +117,29 @@ En utilisant Spring Boot, le patrno MVC (Modèle-vue-contrôleur) était le choi
 \newline
 Cette image est l'arborescence de notre projet. Notre API ne délivrant pas de pages web, nous n'avons pas de vues.
 \newline
+\newline
 Les controlleurs sont les routes de notre API, avec une partie de la logique de notre code.
+\newline
 \newline
 Le dossier "model" contient les modèles utilisés par notre API, avec des annonations permettant de les utiliser comme modèle de notre base de données, par le biais de Spring Data JPA.
 \newline
+\newline
 Le dossier "repository" contient les interfaces pour faire communiquer notre API avec notre base de données, en utilisant les modèles pour le transfert et le stockage de données.
+\section{Tests unitaires}
+Les tests unitaires écrits servent à tester des composants de notre code. Ces composants sont les modèles et les controlleurs, et non les interfaces car celles-ci n'ayant pas de logique de code, et étant implicitement testées lors des tests des controleurs.
+\newline
+\newline
+\includegraphics[scale=0.8]{./images/Backend/test-mail.png}
+\newline
+\newline
+Le framework de tests utilisé pour la rédaction de ceux-ci est Junit 5, un des principaux frameworks de tests disponibles pour le langage Java. Les tests unitaires lancent une partie du programme et comparent le resultat obtenu par raport à un résultat attendu, spécifié par le développeur.
+\section{Analyse de code}
+\includegraphics[scale=0.6]{./images/Backend/sonarqube1.png}
+\newline
+\newline
+L'analyse de notre code est effectué par Sonarqube, qui en plus d'analyser la qualité de notre code, est capable de nous donner la couverture de tests, avec l'aide d'un autre logiciel, nommé jacoco.
+\section{Tests de charge}
+Nous aurions pu utiliser Jmeter pour nos tests de charge, mais la facture de notre application étant calculée au nombre de requêtes, il est impossible pour nous actuellement d'effectuer ce test en production.
 \chapter{SGBD}
 \section{théorème CAP}
 Avant de choisir SGBD (Système de gestion de base de données), il faut décider du type de SGBD pour l'application, en fonction des différents cas d'usage.
